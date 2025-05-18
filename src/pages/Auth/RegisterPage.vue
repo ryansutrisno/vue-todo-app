@@ -121,7 +121,7 @@ const schema = yup.object().shape({
     .oneOf([yup.ref("password")], "Passwords must match"),
 });
 
-const onSubmit = async (values: any, { setErrors }: any) => {
+const onSubmit = async (values: any) => {
   try {
     await authStore.register(values.email, values.password);
     toast.success("Registration successful! Please log in.");
