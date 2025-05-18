@@ -9,35 +9,37 @@ export interface Todo {
   updated_at?: string
 }
 
-export interface SearchParams {
+export interface TodoCreateData {
+  title: string
+  description: string
+}
+
+export interface TodoUpdateData {
   title?: string
   description?: string
   completed?: boolean
-  created_from?: string
-  created_to?: string
-  updated_from?: string
-  updated_to?: string
 }
 
-export const todosService = {
-  async getAll() {
-    const response = await api.get('/todos')
-    return response.data
-  },
-  async create(todo: Omit<Todo, 'id'>) {
-    const response = await api.post('/todos', todo)
-    return response.data
-  },
-  async update(id: number, todo: Partial<Todo>) {
-    const response = await api.put(`/todos/${id}`, todo)
-    return response.data
-  },
-  async delete(id: number) {
-    const response = await api.delete(`/todos/${id}`)
-    return response.data
-  },
-  async search(params: SearchParams) {
-    const response = await api.get('/todos/search', { params })
-    return response.data
-  }
+export async function getTodos(): Promise<Todo[]> {
+  const response = await api.get('/todos')
+  return response.data
+}
+
+export async function searchTodos(params: Record<string, any>): Promise<Todo[]> {
+  const response = await api.get('/todos/search', { params })
+  return response.data
+}
+
+export async function createTodo(data: TodoCreateData): Promise<Todo> {
+  const response = await api.post('/todos', data)
+  return response.data
+}
+
+export async function updateTodo(id: number, data: TodoUpdateData): Promise<Todo> {
+  const response = await api.put(`/todos/${id}`, data)
+  return response.data
+}
+
+export async function deleteTodo(id: number): Promise<void> {
+  await api.delete(`/todos/${id}`)
 }

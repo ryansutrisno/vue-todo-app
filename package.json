@@ -9,13 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.2.0",
     "@vee-validate/rules": "^4.15.0",
     "@vee-validate/yup": "^4.15.0",
-    "autoprefixer": "^10.4.21",
+    "autoprefixer": "^10.4.16",
     "axios": "^1.9.0",
     "pinia": "^3.0.2",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.7",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.3",
     "vee-validate": "^4.15.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1",

@@ -1,25 +1,55 @@
 import api from './api'
 
-interface LoginData {
-  user_name: string
-  user_password: string
+export interface User {
+  id: number
+  name: string
+  email: string
 }
 
-interface RegisterData {
-  user_name: string
-  user_password: string
+export interface AuthResponse {
+  token: string
 }
 
-export const authService = {
-  async login(data: LoginData) {
-    const response = await api.post('/users/login', data)
-    return response.data
-  },
-  async register(data: RegisterData) {
-    const response = await api.post('/users/register', data)
-    return response.data
-  },
-  logout() {
-    localStorage.removeItem('token')
+export async function login(email: string, password: string): Promise<AuthResponse> {
+  try {
+
+    const response = await api.post('/users/login', { 
+      user_name: email, 
+      user_password: password 
+    });
+    
+    if (!response.data.token && response.data.data && response.data.data.token) {
+      response.data.token = response.data.data.token;
+    }
+    
+    return response.data;
+  } catch (error: any) {
+    if (error.response) {
+    } else if (error.request) {
+      console.error('No response received, request was:', error.request);
+    }
+    throw error;
+  }
+}
+
+export async function register(email: string, password: string): Promise<AuthResponse> {
+  try {
+    const response = await api.post('/users/register', { 
+      user_name: email, 
+      user_password: password 
+    });
+    
+    if (!response.data.token && response.data.data && response.data.data.token) {
+      response.data.token = response.data.data.token;
+    }
+    
+    return response.data;
+  } catch (error: any) {
+    console.error('Register request failed:', error.message);
+    if (error.response) {
+      console.error('Response status:', error.response.status);
+      console.error('Response data:', error.response.data);
+    }
+    throw error;
   }
 }
