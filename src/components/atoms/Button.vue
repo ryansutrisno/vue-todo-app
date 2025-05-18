@@ -17,10 +17,7 @@ interface Props {
   className?: string
 }
 
-const { variant, className } = withDefaults(defineProps<Props>(), {
-  variant: 'primary',
-  className: ''
-})
+const { variant = 'primary', className = '' } = defineProps<Props>()
 
 const variantClasses = {
   primary: 'bg-sky-600 text-white hover:bg-indigo-700',

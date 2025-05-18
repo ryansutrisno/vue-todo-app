@@ -24,12 +24,7 @@ interface Props {
   className?: string
 }
 
-const { modelValue, rows, error, className } = withDefaults(defineProps<Props>(), {
-  modelValue: '',
-  rows: 3,
-  error: '',
-  className: ''
-})
+const { modelValue = '', rows = 3, error = '', className = '' } = defineProps<Props>()
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void
