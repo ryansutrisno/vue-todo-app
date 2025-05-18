@@ -155,5 +155,14 @@ const handleReset = () => {
   Object.keys(searchParams).forEach(key => {
     searchParams[key as keyof typeof searchParams] = ''
   })
+
+  isSearching.value = true
+  emit('searchStart')
+  emit('search', {})
+
+  setTimeout(() => {
+    isSearching.value = false
+    emit('searchEnd')
+  }, 500)
 }
 </script>
