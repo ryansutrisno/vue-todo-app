@@ -121,14 +121,14 @@ const schema = yup.object().shape({
     .oneOf([yup.ref("password")], "Passwords must match"),
 });
 
-const onSubmit = async (values: { email: string; password: string }) => {
+const onSubmit = async (values: any, { setErrors }: any) => {
   try {
     await authStore.register(values.email, values.password);
     toast.success("Registration successful! Please log in.");
     router.push("/login");
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      toast.error(`Registration failed: ${error?.response?.data?.error}`);
+  } catch (error: any) {
+    if (error?.response?.data?.error) {
+      toast.error(`Registration failed: ${error.response.data.error}`);
     } else {
       toast.error("Registration failed: An unexpected error occurred");
     }

@@ -17,7 +17,7 @@
 import TodoItem from './TodoItem.vue'
 import type { Todo } from '../../types/todo'
 
-const props = defineProps<{
+const { todos } = defineProps<{
   todos: Todo[]
 }>()
 

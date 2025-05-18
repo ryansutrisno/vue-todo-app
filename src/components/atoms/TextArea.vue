@@ -24,7 +24,7 @@ interface Props {
   className?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const { modelValue, rows, error, className } = withDefaults(defineProps<Props>(), {
   modelValue: '',
   rows: 3,
   error: '',

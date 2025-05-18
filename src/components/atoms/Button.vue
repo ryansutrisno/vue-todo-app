@@ -17,7 +17,7 @@ interface Props {
   className?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const { variant, className } = withDefaults(defineProps<Props>(), {
   variant: 'primary',
   className: ''
 })

@@ -85,7 +85,7 @@ const schema = {
   password: yup.string().required('Password is required')
 }
 
-const onSubmit = async (values: {email: string, password: string}) => {
+const onSubmit = async (values: any, { setErrors }: any) => {
   try {
     await authStore.login(values?.email, values?.password)
     toast.success('Login successful')

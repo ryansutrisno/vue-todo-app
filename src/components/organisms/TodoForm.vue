@@ -52,7 +52,6 @@
 </template>
 
 <script setup lang="ts">
-import { useToast } from 'vue-toastification'
 import { Form, Field } from 'vee-validate'
 import * as yup from 'yup'
 import { PlusIcon } from '@heroicons/vue/24/outline'
@@ -64,8 +63,6 @@ const emit = defineEmits<{
   (e: 'submit', title: string, description: string): void
 }>()
 
-const toast = useToast()
-
 const schema = yup.object().shape({
   title: yup.string()
     .required('Title is required'),
@@ -73,7 +70,7 @@ const schema = yup.object().shape({
     .required('Description is required')
 })
 
-const onSubmit = async (values: { title: string; description: string }, { resetForm }: { resetForm: () => void }) => {
+const onSubmit = async (values: any, { resetForm }: any) => {
   try {
     emit('submit', values.title, values.description)
     resetForm()
